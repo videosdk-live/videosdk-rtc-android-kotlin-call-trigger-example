@@ -41,13 +41,9 @@ class CallConnectionService : ConnectionService() {
                 intent.putExtra("token", token)
                 startActivity(intent)
 
-
                 //update
                 setDisconnected(DisconnectCause(DisconnectCause.LOCAL))
                 destroy()
-
-                Log.d("CallConnectionService", "Call answered")
-                // Start the video call using VideoSDK here
             }
 
             override fun onReject() {
@@ -62,8 +58,6 @@ class CallConnectionService : ConnectionService() {
                 obj.updateCall("REJECTED")
                 setDisconnected(DisconnectCause(DisconnectCause.LOCAL))
                 destroy()
-
-                Log.d("CallConnectionService", "Call rejected")
             }
         }
 
@@ -85,7 +79,6 @@ class CallConnectionService : ConnectionService() {
         connection.setAddress(request.address, TelecomManager.PRESENTATION_ALLOWED)
         connection.setActive()
 
-        // Start the video call using VideoSDK here
         return connection
     }
 }

@@ -91,7 +91,6 @@ class MainActivity : AppCompatActivity() {
         val databaseUtils = DatabaseUtils()
         val databaseReference = FirebaseDatabase.getInstance().reference
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task: Task<String> ->
-            Log.d("TAG", "onCreate: token    " + task.result)
             FcmToken = task.result
             NetworkCallHandler.FcmToken = task.result
             DatabaseUtils.FcmToken = task.result
@@ -153,8 +152,7 @@ class MainActivity : AppCompatActivity() {
         val list: List<PhoneAccountHandle> =
             MainApplication.telecomManager!!.callCapablePhoneAccounts
         for (handle in list) {
-            if (handle.componentName.className == "live.videosdk.ConnectionService.quickstart.Services.CallConnectionService") {
-                Log.d("TAG", "registerPhoneAccount: if con")
+            if (handle.componentName.className == "live.videosdk.call_trigger.kotlin.example.Services.CallConnectionService") {
                 checkAccount++
                 break
             }

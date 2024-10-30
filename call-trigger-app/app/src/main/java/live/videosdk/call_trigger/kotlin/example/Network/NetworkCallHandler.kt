@@ -15,7 +15,6 @@ class NetworkCallHandler  {
         lateinit var FcmToken: String
         lateinit var calleeInfoToken:String
     }
-
         fun updateCall(call_update: String){
         val fcmToken: String = MyFirebaseMessagingService.FCMtoken
 
@@ -44,7 +43,6 @@ class NetworkCallHandler  {
 
 
     fun initiateCall() {
-        Log.d("TAG", "initiateCall: ")
         val apiService: ApiService = ApiClient.client!!.create(ApiService::class.java)
 
         val callerInfo: MutableMap<String, String> = HashMap()
@@ -64,7 +62,6 @@ class NetworkCallHandler  {
         callRequestBody["callerInfo"] = callerInfo
         callRequestBody["calleeInfo"] = calleeInfo
         callRequestBody["videoSDKInfo"] = videoSDKInfo
-        Log.d("TAG", "initiateCall: "+ MainApplication.meetingId+ "   token   "+MainApplication.token)
 
         val call: Call<String> = apiService.initiateCall(callRequestBody)
         call.enqueue(object : Callback<String> {

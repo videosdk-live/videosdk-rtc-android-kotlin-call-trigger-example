@@ -13,27 +13,23 @@ class NetworkUtils {
     //Replace with the token you generated from the VideoSDK Dashboard
     var sampleToken: String = MainApplication.token
     fun createMeeting(callBack: MeetingIdCallBack) {
-        Log.d("TAG", "createMeeting: ")
         AndroidNetworking.post("https://api.videosdk.live/v2/rooms")
             .addHeaders("Authorization", sampleToken) //we will pass the token in the Headers
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject) {
                     try {
-                        Log.d("TAG", "onResponse: ")
                         // response will contain `roomId`
                         val meetingId = response.getString("roomId")
                         callBack.onMeetingIdReceived(meetingId,sampleToken)
                         //
                     } catch (e: JSONException) {
                         e.printStackTrace()
-                        Log.d("TAG", "onResponse: $e")
                     }
                 }
 
                 override fun onError(anError: ANError) {
                     anError.printStackTrace()
-                    Log.d("TAG", "onError: ")
                 }
             })
     }

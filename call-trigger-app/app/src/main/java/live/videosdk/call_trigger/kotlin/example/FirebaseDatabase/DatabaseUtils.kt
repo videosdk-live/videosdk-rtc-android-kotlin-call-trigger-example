@@ -17,7 +17,6 @@ class DatabaseUtils {
     val networkUtils: NetworkCallHandler = NetworkCallHandler()
     fun sendUserDataToFirebase(databaseReference: DatabaseReference) {
         val usersRef = databaseReference.child("User")
-
         usersRef.orderByChild("token").equalTo(FcmToken)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -38,8 +37,6 @@ class DatabaseUtils {
                         val map: MutableMap<String, Any?> = HashMap()
                         map["callerId"] = myCallId
                         map["token"] = FcmToken
-
-                        Log.d("TAG", "sendUserDataToFirebase: $FcmToken")
                         if (userId != null) {
                             usersRef.child(userId).setValue(map)
                                 .addOnSuccessListener { aVoid: Void? ->
@@ -76,7 +73,6 @@ class DatabaseUtils {
                                 calleeInfoToken = token
                                 NetworkCallHandler.calleeInfoToken = token
                                 networkUtils.initiateCall()
-                                Log.d("TAG", "retrieveUserData: $calleeInfoToken")
                                 break
                             }
                         }
