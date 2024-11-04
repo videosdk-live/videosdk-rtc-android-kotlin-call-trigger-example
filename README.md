@@ -84,7 +84,7 @@ npm run start
 
 ### Step 4: Add local server url in client
 
-Add Local server ip address in `client/api/api.js` file, eg. "http://192.168.1.10:9000".
+Add Local server ip address in `Network/ApiClient.kt` file, eg. "http://192.168.1.10:9000".
 
 ```js title="api.js"
 const FCM_SERVER_URL = "BASE_URL";
